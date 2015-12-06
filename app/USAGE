@@ -2,13 +2,13 @@ Description:
   Creates a ExpressJS API Project
 
 Example:
-  yo express-api
+  yo expressjs-api
 
 Sub Generators:
 
   Server Side:
-    express-api:endpoint
+    expressjs-api:endpoint
 
   Deployment:
-    express-api:openshift
-    express-api:heroku
+    expressjs-api:openshift
+    expressjs-api:heroku

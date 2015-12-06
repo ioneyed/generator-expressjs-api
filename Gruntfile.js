@@ -54,7 +54,7 @@ module.exports = function (grunt) {
     },
     stage: {
       options: {
-        files: ['CHANGELOG.md', 'express-api-deps']
+        files: ['CHANGELOG.md', 'expressjs-api-deps']
       }
     },
     buildcontrol: {
@@ -202,7 +202,7 @@ module.exports = function (grunt) {
         ]
       ];
 
-      var gen = helpers.createGenerator('express-api:app', deps);
+      var gen = helpers.createGenerator('expressjs-api:app', deps);
 
       helpers.mockPrompt(gen, options);
       gen.run({}, function () {
@@ -253,8 +253,8 @@ module.exports = function (grunt) {
 
   grunt.registerTask('updateFixtures', 'updates package', function(target) {
     var genVer = require('./package.json').version;
-    var dest = __dirname + ((target === 'deps') ? '/express-api-deps/' : '/test/fixtures/');
-    var appName = (target === 'deps') ? 'express-api-deps' : 'tempApp';
+    var dest = __dirname + ((target === 'deps') ? '/expressjs-api-deps/' : '/test/fixtures/');
+    var appName = (target === 'deps') ? 'expressjs-api-deps' : 'tempApp';
 
     var processJson = function(s, d) {
       // read file, strip all ejs conditionals, and parse as json

@@ -41,8 +41,8 @@ export default class Generator extends Base {
         this.log(chalk.red(`
 ################################################################
 # NOTE: You are using a pre-release version of
-# generator-express-api. For a more stable version, run
-# \`npm install -g generator-express-api@^1.0.0\`
+# generator-expressjs-api. For a more stable version, run
+# \`npm install -g generator-expressjs-api@^1.0.0\`
 ################################################################`));
         this.log('You\'re using the ExpressJS Api Generator, version ' + this.rootGeneratorVersion());
         this.log(this.yoWelcome);
@@ -341,7 +341,7 @@ export default class Generator extends Base {
           models: models
         }
         options[models+'Models'] = this.filters[models+'Models'] || {};
-        this.composeWith('express-api:endpoint', {
+        this.composeWith('expressjs-api:endpoint', {
           options: options,
           args: ['thing']
         });

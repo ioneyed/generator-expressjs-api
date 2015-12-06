@@ -9,7 +9,7 @@ var chai = require('chai');
 var expect = chai.expect;
 var recursiveReadDir = require('recursive-readdir');
 
-describe('express-api generator', function () {
+describe('expressjs-api generator', function () {
   var gen, defaultOptions = {
     testing: 'mocha',
     chai: 'expect',
@@ -25,7 +25,7 @@ describe('express-api generator', function () {
     gen.run(function () {
       var afGenerator;
       var deps = [path.join('../..', generatorType)];
-      afGenerator = helpers.createGenerator('express-api:' + generatorType, deps, [name], {
+      afGenerator = helpers.createGenerator('expressjs-api:' + generatorType, deps, [name], {
         skipInstall: true
       });
 
@@ -254,7 +254,7 @@ describe('express-api generator', function () {
         return done(err);
       }
 
-      gen = helpers.createGenerator('express-api:app', deps, [], {
+      gen = helpers.createGenerator('expressjs-api:app', deps, [], {
         skipInstall: true
       });
       done();
@@ -351,7 +351,7 @@ describe('express-api generator', function () {
       it('should use existing config if available', function(done) {
         this.timeout(60000);
         copySync(__dirname + '/fixtures/.yo-rc.json', __dirname + '/temp/.yo-rc.json');
-        var gen = helpers.createGenerator('express-api:app', [
+        var gen = helpers.createGenerator('expressjs-api:app', [
           '../../endpoint',
         ], [], {
           skipInstall: true

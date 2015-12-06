@@ -1,34 +1,26 @@
 {
-  "name": "generator-express-api",
-  "version": "3.0.0-rc8",
-  "description": "Yeoman generator for creating MEAN stack applications, using MongoDB, Express, AngularJS, and Node",
+  "name": "generator-expressjs-api",
+  "version": "0.0.1",
+  "description": "Yeoman generator for creating Web APIs using MongoDB/Sequelize (MySQL, Postgres, etc), Express, and Node",
   "keywords": [
     "yeoman-generator",
-    "mean",
     "mongodb",
-    "angularjs",
+    "postgres",
     "express",
     "scaffold",
-    "fullstack",
     "framework",
     "component",
-    "front-end",
     "app"
+    "api"
   ],
-  "homepage": "https://github.com/DaftMonk/generator-express-api",
-  "bugs": "https://github.com/DaftMonk/generator-express-api/issues",
-  "author": "Tyler Henkel (http://tylerhenkel.com/)",
+  "homepage": "https://github.com/ioneyed/generator-expressjs-api",
+  "bugs": "https://github.com/ioneyed/generator-expressjs-api/issues",
+  "author": "Robert Buchanan (http://ioneyed.com/)",
   "contributors": [
-    "Andrew Koroluk <koroluka@gmail.com> (http://andrewk.me/)",
-    "Cody Mize <me@codymize.com> (http://codymize.com/)",
-    "Brian Ford <btford@umich.edu> (http://briantford.com/)",
-    "Pascal Hartig <passy@twitter.com> (http://passy.me/)",
-    "Eddie Monge (http://eddiemonge.com)",
-    "Sindre Sorhus <sindresorhus@gmail.com> (https://twitter.com/sindresorhus)"
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/DaftMonk/generator-express-api.git"
+    "url": "git://github.com/ioneyed/generator-expressjs-api.git"
   },
   "scripts": {
     "test": "grunt test"
@@ -36,7 +28,6 @@
   "dependencies": {
     "babel-core": "^5.8.23",
     "chalk": "^1.1.0",
-    "generator-ng-component": "~0.1.1",
     "glob": "^5.0.14",
     "lodash": "^3.10.1",
     "underscore.string": "^3.1.1",

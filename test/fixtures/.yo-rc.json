@@ -1,5 +1,5 @@
 {
-  "generator-express-api": {
+  "generator-expressjs-api": {
     "endpointDirectory": "server/api/",
     "insertRoutes": true,
     "registerRoutesFile": "server/routes.js",
