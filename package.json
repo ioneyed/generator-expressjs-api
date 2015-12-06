@@ -10,7 +10,7 @@
     "scaffold",
     "framework",
     "component",
-    "app"
+    "app",
     "api"
   ],
   "homepage": "https://github.com/ioneyed/generator-expressjs-api",
