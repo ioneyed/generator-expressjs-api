@@ -14,8 +14,7 @@ module.exports = function(sequelize, DataTypes) {
       type: <% if(filters.sequelizeModels.serial) { %> DataTypes.INTEGER <% } if (filters.sequelizeModels.uuid) { %> DataTypes.UUID <% } %>,
       allowNull: false,
       primaryKey: true,
-      <% if(filters.sequelizeModels.serial) { %> autoIncrement: true <% } %>
-      <% if(filters.sequelizeModels.uuid) { %> defaultValue: DataTypes.UUIDV4 <% } %>
+      <% if(filters.sequelizeModels.serial) { %> autoIncrement: true <% } %><% if(filters.sequelizeModels.uuid) { %> defaultValue: DataTypes.UUIDV4 <% } %>
     },
     name: DataTypes.STRING,
     email: {
@@ -49,7 +48,7 @@ module.exports = function(sequelize, DataTypes) {
     paranoid: true,<% } %><% if (filters.sequelizeModels) { %>
     underscored: true,
     freezeTableName:true,
-    tableName:'user<% if (filters.sequelizeModels.pluralization) { %>s<% } %>'<% } %>
+    tableName:'user<% if (filters.sequelizeModels.pluralization) { %>s<% } %>',<% } %>
     /**
      * Virtual Getters
      */
