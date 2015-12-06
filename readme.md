@@ -1,5 +1,5 @@
-# AngularJS Full-Stack generator
-> Yeoman generator for creating MEAN stack applications, using MongoDB, Express, AngularJS, and Node - lets you quickly set up a project following best practices.
+# ExpressJS API generator
+> Yeoman generator for creating API's using MongoDB/Sequelize (Mysql, Postgres, sqlite), Express, and Node - lets you quickly set up a project following best practices.
 
 #### Generated project:
 
@@ -38,35 +38,16 @@ Run `grunt` for building, `grunt serve` for preview, and `grunt serve:dist` for 
       * `Expect`
       * `Should`
 
-**Client**
-
-* Scripts: `Babel`, `TypeScript` (Coming Soon)
-* Markup:  `HTML`, `Jade`
-* Stylesheets: `CSS`, `Stylus`, `Sass`, `Less`
-* Angular Routers: `ngRoute`, `ui-router`
-* CSS Frameworks: `Bootstrap`
-  * Option to include `UI Bootstrap`
-
 **Server**
 
 * Scripts: `Babel`
 * Database:
   * `None`,
   * `MongoDB`, `SQL`
+    * Sequelize (SQL) Table Options: `Timestamps`, `Paranoid`, `Pluralized Names`  
     * Authentication boilerplate: `Yes`, `No`
     * oAuth integrations: `Facebook` `Twitter` `Google`
     * Socket.io integration: `Yes`, `No`
-
-## Injection
-
-A grunt task looks for new files in your `client/app` and `client/components` folder and automatically injects them in the appropriate places based on an injection block.
-
-* `less` files into `client/app/app.less`
-* `scss` files into `client/app/app.scss`
-* `stylus` files into `client/app/app.styl`
-* `css` files into `client/index.html`
-* `js` files into `client/index.html`
-* `babel` temp `js` files into `client/index.html`
 
 ## Generators
 
@@ -76,21 +57,12 @@ Available generators:
     - [express-api](#app) (aka [express-api:app](#app))
 * Server Side
     - [express-api:endpoint](#endpoint)
-* Client Side
-    - [express-api:route](#route)
-    - [express-api:controller](#controller)
-    - [express-api:filter](#filter)
-    - [express-api:directive](#directive)
-    - [express-api:service](#service)
-    - [express-api:provider](#service)
-    - [express-api:factory](#service)
-    - [express-api:decorator](#decorator)
 * Deployment
     - [express-api:openshift](#openshift)
     - [express-api:heroku](#heroku)
 
 ### App
-Sets up a new AngularJS + Express app, generating all the boilerplate you need to get started.
+Sets up a new ExpressJS API Boilerplate with best practices
 
 Usage:
 ```bash
@@ -146,114 +118,6 @@ Produces:
     server/api/message/message.model.js  (optional)
     server/api/message/message.events.js (optional)
     server/api/message/message.socket.js (optional)
-
-### Route
-Generates a new route.
-
-Example:
-```bash
-yo express-api:route myroute
-[?] Where would you like to create this route? client/app/
-[?] What will the url of your route be? /myroute
-```
-
-Produces:
-
-    client/app/myroute/myroute.js
-    client/app/myroute/myroute.controller.js
-    client/app/myroute/myroute.controller.spec.js
-    client/app/myroute/myroute.html
-    client/app/myroute/myroute.scss
-
-
-### Controller
-Generates a controller.
-
-Example:
-```bash
-yo express-api:controller user
-[?] Where would you like to create this controller? client/app/
-```
-
-Produces:
-
-    client/app/user/user.controller.js
-    client/app/user/user.controller.spec.js
-
-### Directive
-Generates a directive.
-
-Example:
-```bash
-yo express-api:directive myDirective
-[?] Where would you like to create this directive? client/app/
-[?] Does this directive need an external html file? Yes
-```
-
-Produces:
-
-    client/app/myDirective/myDirective.directive.js
-    client/app/myDirective/myDirective.directive.spec.js
-    client/app/myDirective/myDirective.html
-    client/app/myDirective/myDirective.scss
-
-**Simple directive without an html file**
-
-Example:
-```bash
-yo express-api:directive simple
-[?] Where would you like to create this directive? client/app/
-[?] Does this directive need an external html file? No
-```
-
-Produces:
-
-    client/app/simple/simple.directive.js
-    client/app/simple/simple.directive.spec.js
-
-### Filter
-Generates a filter.
-
-Example:
-```bash
-yo express-api:filter myFilter
-[?] Where would you like to create this filter? client/app/
-```
-
-Produces:
-
-    client/app/myFilter/myFilter.filter.js
-    client/app/myFilter/myFilter.filter.spec.js
-
-### Service
-Generates an AngularJS service.
-
-Example:
-```bash
-yo express-api:service myService
-[?] Where would you like to create this service? client/app/
-```
-
-Produces:
-
-    client/app/myService/myService.service.js
-    client/app/myService/myService.service.spec.js
-
-
-You can also do `yo express-api:factory` and `yo express-api:provider` for other types of services.
-
-### Decorator
-Generates an AngularJS service decorator.
-
-Example:
-```bash
-yo express-api:decorator serviceName
-[?] Where would you like to create this decorator? client/app/
-```
-
-Produces
-
-    client/app/serviceName/serviceName.decorator.js
 
 ###Openshift
 
@@ -343,8 +207,6 @@ Running `grunt test` will run the client and server unit tests with karma and mo
 
 Use `grunt test:server` to only run server tests.
 
-Use `grunt test:client` to only run client tests.
-
 **Protractor tests**
 
 To setup protractor e2e tests, you must first run
@@ -378,13 +240,6 @@ Keeping your app secrets and other sensitive information in source control isn't
 
 Overview
 
-    ├── client
-    │   ├── app                 - All of our app specific components go in here
-    │   ├── assets              - Custom assets: fonts, images, etc…
-    │   ├── components          - Our reusable components, non-specific to to our app
-    │
-    ├── e2e                     - Our protractor end to end tests
-    │
     └── server
         ├── api                 - Our apps server api
         ├── auth                - For handling authentication with different auth strategies
@@ -392,16 +247,6 @@ Overview
         ├── config              - Where we do the bulk of our apps configuration
         │   └── local.env.js    - Keep our environment variables out of source control
         │   └── environment     - Configuration specific to the node environment
-        └── views               - Server rendered views
-
-An example client component in `client/app`
-
-    main
-    ├── main.js                 - Routes
-    ├── main.controller.js      - Controller for our main route
-    ├── main.controller.spec.js - Test
-    ├── main.html               - View
-    └── main.less               - Styles
 
 An example server component in `server/api`
 
@@ -414,15 +259,13 @@ An example server component in `server/api`
 
 ## Contribute
 
-See the [contributing docs](https://github.com/DaftMonk/generator-express-api/blob/master/contributing.md)
+See the [contributing docs](https://github.com/ioneyed/generator-express-api/blob/master/contributing.md)
 
 This project has 2 main branches: `master` and `canary`. The `master` branch is where the current stable code lives and should be used for production setups. The `canary` branch is the main development branch, this is where PRs should be submitted to (backport fixes may be applied to `master`).
 
 By separating the current stable code from the cutting-edge development we hope to provide a stable and efficient workflow for users and developers alike.
 
 When submitting an issue, please follow the [guidelines](https://github.com/yeoman/yeoman/blob/master/contributing.md#issue-submission). Especially important is to make sure Yeoman is up-to-date, and providing the command or commands that cause the issue.
-
-When submitting a PR, make sure that the commit messages match the [AngularJS conventions](https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/).
 
 When submitting a bugfix, try to write a test that exposes the bug and fails before applying your fix. Submit the test alongside the fix.
 
