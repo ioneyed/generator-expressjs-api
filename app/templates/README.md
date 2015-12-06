@@ -1,6 +1,6 @@
 # <%= lodash.slugify(lodash.humanize(appname)) %>
 
-This project was generated with the [Express API Generator](https://github.com/ioneyed/generator-express-api) version <%= rootGeneratorVersion() %>.
+This project was generated with the [Express API Generator](https://github.com/ioneyed/generator-expressjs-api) version <%= rootGeneratorVersion() %>.
 
 ## Getting Started
 

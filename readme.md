@@ -5,9 +5,9 @@
 
 ## Usage
 
-Install `yo`, `grunt-cli`, and `generator-express-api`:
+Install `yo`, `grunt-cli`, and `generator-expressjs-api`:
 ```
-npm install -g yo grunt-cli generator-express-api
+npm install -g yo grunt-cli generator-expressjs-api
 ```
 
 Make a new directory, and `cd` into it:
@@ -15,9 +15,9 @@ Make a new directory, and `cd` into it:
 mkdir my-new-project && cd $_
 ```
 
-Run `yo express-api`, optionally passing an app name:
+Run `yo expressjs-api`, optionally passing an app name:
 ```
-yo express-api [app-name]
+yo expressjs-api [app-name]
 ```
 
 Run `grunt` for building, `grunt serve` for preview, and `grunt serve:dist` for a preview of the built app.
@@ -54,12 +54,12 @@ Run `grunt` for building, `grunt serve` for preview, and `grunt serve:dist` for 
 Available generators:
 
 * App
-    - [express-api](#app) (aka [express-api:app](#app))
+    - [expressjs-api](#app) (aka [expressjs-api:app](#app))
 * Server Side
-    - [express-api:endpoint](#endpoint)
+    - [expressjs-api:endpoint](#endpoint)
 * Deployment
-    - [express-api:openshift](#openshift)
-    - [express-api:heroku](#heroku)
+    - [expressjs-api:openshift](#openshift)
+    - [expressjs-api:heroku](#heroku)
 
 ### App
 Sets up a new ExpressJS API Boilerplate with best practices
@@ -67,7 +67,7 @@ Sets up a new ExpressJS API Boilerplate with best practices
 Usage:
 ```bash
 Usage:
-  yo express-api:app [options] [<name>]
+  yo expressjs-api:app [options] [<name>]
 
 Options:
   -h,   --help          # Print the generator's options and usage
@@ -81,7 +81,7 @@ Arguments:
 
 Example:
 ```bash
-yo express-api
+yo expressjs-api
 ```
 
 ### Endpoint
@@ -90,7 +90,7 @@ Generates a new API endpoint.
 Usage:
 ```bash
 Usage:
-  yo express-api:endpoint [options] <name>
+  yo expressjs-api:endpoint [options] <name>
 
 Options:
   -h,   --help               # Print the generator's options and usage
@@ -105,7 +105,7 @@ Arguments:
 
 Example:
 ```bash
-yo express-api:endpoint message
+yo expressjs-api:endpoint message
 [?] What will the url of your endpoint be? /api/messages
 ```
 
@@ -123,7 +123,7 @@ Produces:
 
 Deploying to OpenShift can be done in just a few steps:
 
-    yo express-api:openshift
+    yo expressjs-api:openshift
 
 A live application URL will be available in the output.
 
@@ -160,7 +160,7 @@ Commit and push the resulting build, located in your dist folder:
 
 Deploying to heroku only takes a few steps.
 
-    yo express-api:heroku
+    yo expressjs-api:heroku
 
 To work with your new heroku app using the command line, you will need to run any `heroku` commands from the `dist` folder.
 
@@ -259,7 +259,7 @@ An example server component in `server/api`
 
 ## Contribute
 
-See the [contributing docs](https://github.com/ioneyed/generator-express-api/blob/master/contributing.md)
+See the [contributing docs](https://github.com/ioneyed/generator-expressjs-api/blob/master/contributing.md)
 
 This project has 2 main branches: `master` and `canary`. The `master` branch is where the current stable code lives and should be used for production setups. The `canary` branch is the main development branch, this is where PRs should be submitted to (backport fixes may be applied to `master`).
 
