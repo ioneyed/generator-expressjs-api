@@ -27,10 +27,6 @@ var Store = expressSequelizeSession(session.Store);<% } %>
 module.exports = function(app) {
   var env = app.get('env');
 
-  app.set('views', config.root + '/server/views');<% if (filters.html) { %>
-  app.engine('html', require('ejs').renderFile);
-  app.set('view engine', 'html');<% } %><% if (filters.jade) { %>
-  app.set('view engine', 'jade');<% } %>
   app.use(compression());
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());

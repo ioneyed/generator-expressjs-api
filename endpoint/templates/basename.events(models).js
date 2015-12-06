@@ -32,7 +32,8 @@ for (var e in events) {
 
 function emitEvent(event) {
   return function(doc<% if (filters.sequelizeModels) { %>, options, done<% } %>) {
-    <%= classedName %>Events.emit(event + ':' + doc._id, doc);
+    <% if(filters.mongooseModels) { %><%= classedName %>Events.emit(event + ':' + doc._id, doc);<% } %>
+    <% if(filters.sequelizeModels) { %><%= classedName %>Events.emit(event + ':' + doc.id, doc);<% } %>
     <%= classedName %>Events.emit(event, doc);<% if (filters.sequelizeModels) { %>
     done(null);<% } %>
   }

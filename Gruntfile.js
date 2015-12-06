@@ -45,22 +45,11 @@ module.exports = function (grunt) {
         tagName: '<%= version %>',
         file: 'package.json',
         beforeBump: ['updateSubmodules'],
-        afterBump: ['updateFixtures:deps', 'commitNgFullstackDeps'],
+        afterBump: ['updateFixtures:deps'],
         beforeRelease: ['stage'],
         push: false,
         pushTags: false,
         npm: false
-      }
-    },
-    updateSubmodules: {
-      options: {
-        modules: ['express-api-deps']
-      }
-    },
-    commitNgFullstackDeps: {
-      options: {
-        cwd: 'express-api-deps',
-        files: ['package.json', 'bower.json']
       }
     },
     stage: {
@@ -74,7 +63,7 @@ module.exports = function (grunt) {
         commit: true,
         push: true,
         connectCommits: false,
-        message: 'Built using Angular Fullstack v<%= pkg.version %> from commit %sourceCommit%'
+        message: 'Built using ExpressJS Api v<%= pkg.version %> from commit %sourceCommit%'
       },
       release: {
         options: {

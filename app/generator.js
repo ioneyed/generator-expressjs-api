@@ -118,6 +118,45 @@ export default class Generator extends Base {
           }
         }, {
           type: 'confirm',
+          name: 'pluralization',
+          message: 'Enable Pluralized table names (User becomes Users)',
+          when: function(answers){
+            return answers.odms && answers.odms.length >= 1 && answers.odms.indexOf('sequelize') !=1;
+          }
+        }, {
+          type: 'confirm',
+          name: 'timestamps',
+          message: 'Enable timestamps (created_at, updated_at)?',
+          when: function (answers){
+            return answers.odms && answers.odms.length >= 1 && answers.odms.indexOf('sequelize') != -1;
+          }
+        }, {
+          type: 'confirm',
+          name: 'paranoid',
+          message: 'Enable "paranoid" deletes (deleted_at) within SQL?',
+          when: function (answers){
+            return answers.odms && answers.odms.length >= 1 && answers.odms.indexOf('sequelize') != -1;
+          }
+        },{
+          type: 'list',
+          name: 'primaryKey',
+          message: 'What type of RDBMS Primary Key should be used?',
+          choices: [
+            {
+              value:'serial',
+              name: 'Auto-Incrementing (Serial)'
+            },{
+              value:'uuid',
+              name: 'Universal Unique Identifier (UUIDv4)'
+            }],
+          filter: function ( val ) {
+            return val.toLowerCase();
+          },
+          when: function (answers){
+            return answers.odms && answers.odms.length >= 0 && answers.odms.indexOf('sequelize') != -1;
+          }
+        }, {
+          type: 'confirm',
           name: 'auth',
           message: 'Would you scaffold out an authentication boilerplate?',
           when: function (answers) {
@@ -167,7 +206,16 @@ export default class Generator extends Base {
               models = answers.models;
             }
             this.filters.models = true;
-            this.filters[models + 'Models'] = true;
+            this.filters[models + 'Models'] = {};
+            this.filters[models + 'Models'].serial = answers.primaryKey === 'serial' ? true : false;
+            this.filters[models + 'Models'].uuid = answers.primaryKey === 'uuid' ? true : false;
+            delete answers.primaryKey;
+            this.filters[models + 'Models'].paranoid = answers.paranoid || false;
+            delete answers.paranoid;
+            this.filters[models + 'Models'].timestamps = answers.timestamps || false;
+            delete answers.timestamps;
+            this.filters[models + 'Models'].pluralization = answers.pluralization || false;
+            delete answers.pluralization;
             answers.odms.forEach(function(odm) {
               this.filters[odm] = true;
             }.bind(this));
@@ -288,11 +336,13 @@ export default class Generator extends Base {
         } else if (this.filters.sequelizeModels) {
           models = 'sequelize';
         }
+        var options = {
+          route: '/api/things',
+          models: models
+        }
+        options[models+'Models'] = this.filters[models+'Models'] || {};
         this.composeWith('express-api:endpoint', {
-          options: {
-            route: '/api/things',
-            models: models
-          },
+          options: options,
           args: ['thing']
         });
       }

@@ -47,7 +47,7 @@ describe('express-api generator', function () {
    */
   function assertOnlyFiles(expectedFiles, done, topLevelPath, skip) {
     topLevelPath = topLevelPath || './';
-    skip = skip || ['node_modules', 'client/bower_components'];
+    skip = skip || ['node_modules'];
 
     recursiveReadDir(topLevelPath, skip, function(err, actualFiles) {
       if (err) { return done(err); }
@@ -174,8 +174,6 @@ describe('express-api generator', function () {
       'server/config/environment/production.js',
       'server/config/environment/test.js',
       'server/config/environment/shared.js',
-      'server/views/404.' + markup,
-      '.bowerrc',
       '.buildignore',
       '.editorconfig',
       '.gitattributes',
@@ -185,7 +183,6 @@ describe('express-api generator', function () {
       '.yo-rc.json',
       'Gruntfile.js',
       'package.json',
-      'bower.json',
       'mocha.conf.js',
       'README.md'
     ]);

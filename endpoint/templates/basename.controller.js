@@ -78,7 +78,7 @@ exports.show = function(req, res) {
   <% if (filters.mongooseModels) { %><%= classedName %>.findByIdAsync(req.params.id)<% }
      if (filters.sequelizeModels) { %><%= classedName %>.find({
     where: {
-      _id: req.params.id
+      id: req.params.id
     }
   })<% } %>
     .then(handleEntityNotFound(res))
@@ -96,13 +96,18 @@ exports.create = function(req, res) {
 
 // Updates an existing <%= classedName %> in the DB
 exports.update = function(req, res) {
+  <% if (filters.mongooseModels) { %>
   if (req.body._id) {
     delete req.body._id;
   }
+  <% } if (filters.sequelizeModels) { %>
+  if(req.body.id){
+    delete req.body.id;
+  }<% } %>
   <% if (filters.mongooseModels) { %><%= classedName %>.findByIdAsync(req.params.id)<% }
      if (filters.sequelizeModels) { %><%= classedName %>.find({
     where: {
-      _id: req.params.id
+      id: req.params.id
     }
   })<% } %>
     .then(handleEntityNotFound(res))
@@ -116,7 +121,7 @@ exports.destroy = function(req, res) {
   <% if (filters.mongooseModels) { %><%= classedName %>.findByIdAsync(req.params.id)<% }
      if (filters.sequelizeModels) { %><%= classedName %>.find({
     where: {
-      _id: req.params.id
+      id: req.params.id
     }
   })<% } %>
     .then(handleEntityNotFound(res))

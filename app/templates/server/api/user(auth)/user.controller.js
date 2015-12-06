@@ -35,7 +35,7 @@ exports.index = function(req, res) {
   <% if (filters.mongooseModels) { %>User.findAsync({}, '-salt -hashedPassword')<% }
      if (filters.sequelizeModels) { %>User.findAll({
     attributes: [
-      '_id',
+      'id',
       'name',
       'email',
       'role',
@@ -52,19 +52,27 @@ exports.index = function(req, res) {
  * Creates a new user
  */
 exports.create = function(req, res, next) {
-  <% if (filters.mongooseModels) { %>var newUser = new User(req.body);
+  <% if (filters.mongooseModels) { %>
+  var newUser = new User(req.body);
   newUser.provider = 'local';
   newUser.role = 'user';
   newUser.saveAsync()<% }
-     if (filters.sequelizeModels) { %>var newUser = User.build(req.body);
+     if (filters.sequelizeModels) { %>
+  var newUser = User.build(req.body);
   newUser.setDataValue('provider', 'local');
   newUser.setDataValue('role', 'user');
   newUser.save()<% } %>
     <% if (filters.mongooseModels) { %>.spread(function(user) {<% }
        if (filters.sequelizeModels) { %>.then(function(user) {<% } %>
+      <% if (filters.mongooseModels) { %>
       var token = jwt.sign({ _id: user._id }, config.secrets.session, {
-        expiresInMinutes: 60 * 5
+        expiresIn: 60 * 60 * 5
       });
+      <% } if (filters.sequelizeModels) { %>
+        var token = jwt.sign({ id: user.id }, config.secrets.session, {
+          expiresIn: 60 * 60 * 5
+        });
+      <% } %>
       res.json({ token: token });
     })
     .catch(validationError(res));
@@ -79,7 +87,7 @@ exports.show = function(req, res, next) {
   <% if (filters.mongooseModels) { %>User.findByIdAsync(userId)<% }
      if (filters.sequelizeModels) { %>User.find({
     where: {
-      _id: userId
+      id: userId
     }
   })<% } %>
     .then(function(user) {
@@ -99,7 +107,7 @@ exports.show = function(req, res, next) {
  */
 exports.destroy = function(req, res) {
   <% if (filters.mongooseModels) { %>User.findByIdAndRemoveAsync(req.params.id)<% }
-     if (filters.sequelizeModels) { %>User.destroy({ _id: req.params.id })<% } %>
+     if (filters.sequelizeModels) { %>User.destroy({ id: req.params.id })<% } %>
     .then(function() {
       res.status(204).end();
     })
@@ -110,14 +118,15 @@ exports.destroy = function(req, res) {
  * Change a users password
  */
 exports.changePassword = function(req, res, next) {
-  var userId = req.user._id;
+  <% if (filters.mongooseModels) { %> var userId = req.user._id; <% } %>
+  <% if (filters.sequelizeModels){ %> var userId = req.user.id; <% } %>
   var oldPass = String(req.body.oldPassword);
   var newPass = String(req.body.newPassword);
 
   <% if (filters.mongooseModels) { %>User.findByIdAsync(userId)<% }
      if (filters.sequelizeModels) { %>User.find({
     where: {
-      _id: userId
+      id: userId
     }
   })<% } %>
     .then(function(user) {
@@ -139,15 +148,16 @@ exports.changePassword = function(req, res, next) {
  * Get my info
  */
 exports.me = function(req, res, next) {
-  var userId = req.user._id;
+  <% if (filters.mongooseModels) { %>var userId = req.user._id;<% }
+  if(filters.sequelizeModels) { %> var userId = req.user.id; <% } %>
 
   <% if (filters.mongooseModels) { %>User.findOneAsync({ _id: userId }, '-salt -hashedPassword')<% }
      if (filters.sequelizeModels) { %>User.find({
     where: {
-      _id: userId
+      id: userId
     },
     attributes: [
-      '_id',
+      'id',
       'name',
       'email',
       'role',

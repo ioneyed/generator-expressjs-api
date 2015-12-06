@@ -43,7 +43,7 @@ UserSchema
   .virtual('token')
   .get(function() {
     return {
-      '_id': this._id,
+      <% if (filters.mongooseModels) { %>'_id': this._id,  <% } %>
       'role': this.role
     };
   });

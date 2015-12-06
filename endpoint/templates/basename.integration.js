@@ -61,7 +61,8 @@ describe('<%= classedName %> API:', function() {
 
     beforeEach(function(done) {
       request(app)
-        .get('<%= route %>/' + new<%= classedName %>._id)
+        <% if (filters.mongooseModels) { %>.get('<%= route %>/' + new<%= classedName %>._id)<% } %>
+        <% if (filters.sequelizeModels) { %>.get('<%= route %>/' + new<%= classedName %>.id)<% } %>
         .expect(200)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
@@ -89,7 +90,8 @@ describe('<%= classedName %> API:', function() {
 
     beforeEach(function(done) {
       request(app)
-        .put('<%= route %>/' + new<%= classedName %>._id)
+        <% if (filters.mongooseModels) { %>.put('<%= route %>/' + new<%= classedName %>._id) <% } %>
+        <% if (filters.sequelizeModels) { %>.put('<%= route %>/' + new<%= classedName %>.id)<% } %>
         .send({
           name: 'Updated <%= classedName %>',
           info: 'This is the updated <%= cameledName %>!!!'
@@ -120,7 +122,8 @@ describe('<%= classedName %> API:', function() {
 
     it('should respond with 204 on successful removal', function(done) {
       request(app)
-        .delete('<%= route %>/' + new<%= classedName %>._id)
+        <% if (filters.mongooseModels) { %>.delete('<%= route %>/' + new<%= classedName %>._id)<% } %>
+        <% if (filters.sequelizeModels) { %>.delete('<%= route %>/' + new<%= classedName %>.id)<% } %>
         .expect(204)
         .end(function(err, res) {
           if (err) {
@@ -132,7 +135,8 @@ describe('<%= classedName %> API:', function() {
 
     it('should respond with 404 when <%= cameledName %> does not exist', function(done) {
       request(app)
-        .delete('<%= route %>/' + new<%= classedName %>._id)
+        <% if (filters.mongooseModels) { %>.delete('<%= route %>/' + new<%= classedName %>._id)<% } %>
+        <% if (filters.sequelizeModels) { %>.delete('<%= route %>/' + new<%= classedName %>.id)<% } %>
         .expect(404)
         .end(function(err, res) {
           if (err) {

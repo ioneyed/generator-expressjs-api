@@ -46,7 +46,7 @@ export default class Generator extends NamedBase {
         delete this.filters.sequelizeModels;
 
         this.filters[props.models] = true;
-        this.filters[props.models + 'Models'] = true;
+        this.filters[props.models + 'Models'] = props[props.models+'Models'] || {};
       }
       done();
     }.bind(this);

@@ -1,24 +1,13 @@
 # AngularJS Full-Stack generator
-[![Build Status](https://travis-ci.org/DaftMonk/generator-express-api.svg?branch=master)](http://travis-ci.org/DaftMonk/generator-express-api)
-[![npm version](https://badge.fury.io/js/generator-express-api.svg)](http://badge.fury.io/js/generator-express-api)
-[![Dependency Status](https://david-dm.org/daftmonk/generator-express-api.svg)](https://david-dm.org/daftmonk/generator-express-api)
-[![Dev-Dependency Status](https://david-dm.org/daftmonk/generator-express-api/dev-status.svg)](https://david-dm.org/daftmonk/generator-express-api#info=devDependencies)
-[![Gitter chat](https://badges.gitter.im/DaftMonk/generator-express-api.svg)](https://gitter.im/DaftMonk/generator-express-api)
 > Yeoman generator for creating MEAN stack applications, using MongoDB, Express, AngularJS, and Node - lets you quickly set up a project following best practices.
 
-#### Generated project: 
-[![Dependency Status](https://david-dm.org/express-api/express-api-deps.svg)](https://david-dm.org/express-api/express-api-deps)
-[![Dev-Dependency Status](https://david-dm.org/express-api/express-api-deps/dev-status.svg)](https://david-dm.org/express-api/express-api-deps#info=devDependencies)
-
-## Example project
-
-Source code: https://github.com/DaftMonk/fullstack-demo
+#### Generated project:
 
 ## Usage
 
-Install `yo`, `grunt-cli`, `bower`, and `generator-express-api`:
+Install `yo`, `grunt-cli`, and `generator-express-api`:
 ```
-npm install -g yo grunt-cli bower generator-express-api
+npm install -g yo grunt-cli generator-express-api
 ```
 
 Make a new directory, and `cd` into it:
@@ -42,7 +31,7 @@ Run `grunt` for building, `grunt serve` for preview, and `grunt serve:dist` for 
 **General**
 
 * Build Systems: `Grunt`, `Gulp` (Coming Soon)
-* Testing: 
+* Testing:
   * `Jasmine`
   * `Mocha + Chai + Sinon`
     * Chai assertions:
@@ -342,32 +331,6 @@ To make your deployment process easier consider using [grunt-build-control](http
 Commit and push the resulting build, located in your dist folder:
 
     grunt buildcontrol:heroku
-
-
-## Bower Components
-
-The following packages are always installed by the [app](#app) generator:
-
-* angular
-* angular-cookies
-* angular-mocks
-* angular-resource
-* angular-sanitize
-* es5-shim
-* font-awesome
-* json3
-* jquery
-* lodash
-
-These packages are installed optionally depending on your configuration:
-
-* angular-route
-* angular-ui-router
-* angular-socket-io
-* angular-bootstrap
-* bootstrap
-
-All of these can be updated with `bower update` as new versions are released.
 
 ## Configuration
 Yeoman generated projects can be further tweaked according to your needs by modifying project files appropriately.

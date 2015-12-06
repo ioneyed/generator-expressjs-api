@@ -312,19 +312,6 @@ module.exports = function (grunt) {
       ]);
     }
 
-    else if (target === 'client') {
-      return grunt.task.run([
-        'clean:server',
-        'env:all',
-        'concurrent:pre',
-        'concurrent:test',
-        'injector',
-        'postcss',
-        'wiredep:test',
-        'karma'
-      ]);
-    }
-
     else if (target === 'e2e') {
 
       if (option === 'prod') {
@@ -344,9 +331,6 @@ module.exports = function (grunt) {
           'env:test',
           'concurrent:pre',
           'concurrent:test',
-          'injector',
-          'wiredep:client',
-          'postcss',
           'express:dev',
           'protractor'
         ]);
@@ -390,7 +374,6 @@ module.exports = function (grunt) {
 
     else grunt.task.run([
       'test:server',
-      'test:client'
     ]);
   });
 
@@ -400,18 +383,9 @@ module.exports = function (grunt) {
     'concurrent:dist',
     'injector',
     'wiredep:client',
-    'useminPrepare',
-    'postcss',
-    'ngtemplates',
     'concat',
-    'ngAnnotate',
     'copy:dist',
     'babel:server',
-    'cdnify',
-    'cssmin',
-    'uglify',
-    'filerev',
-    'usemin'
   ]);
 
   grunt.registerTask('default', [

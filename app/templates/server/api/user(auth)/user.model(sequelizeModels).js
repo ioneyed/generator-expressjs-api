@@ -10,11 +10,12 @@ var validatePresenceOf = function(value) {
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define('User', {
 
-    _id: {
-      type: DataTypes.INTEGER,
+    id: {
+      type: <% if(filters.sequelizeModels.serial) { %> DataTypes.INTEGER <% } if (filters.sequelizeModels.uuid) { %> DataTypes.UUID <% } %>,
       allowNull: false,
       primaryKey: true,
-      autoIncrement: true
+      <% if(filters.sequelizeModels.serial) { %> autoIncrement: true <% } %>
+      <% if(filters.sequelizeModels.uuid) { %> defaultValue: DataTypes.UUIDV4 <% } %>
     },
     name: DataTypes.STRING,
     email: {
@@ -43,8 +44,12 @@ module.exports = function(sequelize, DataTypes) {
     google: DataTypes.TEXT,<% } %>
     github: DataTypes.TEXT<% } %>
 
-  }, {
-
+  }, {<% if (filters.sequelizeModels.paranoid) { %>
+    timestamps: true,
+    paranoid: true,<% } %><% if (filters.sequelizeModels) { %>
+    underscored: true,
+    freezeTableName:true,
+    tableName:'user<% if (filters.sequelizeModels.pluralization) { %>s<% } %>'<% } %>
     /**
      * Virtual Getters
      */
@@ -60,7 +65,7 @@ module.exports = function(sequelize, DataTypes) {
       // Non-sensitive info we'll be putting in the token
       token: function() {
         return {
-          '_id': this._id,
+          'id': this.id,
           'role': this.role
         };
       }

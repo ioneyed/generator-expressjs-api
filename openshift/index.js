@@ -13,7 +13,7 @@ var Generator = module.exports = function Generator() {
   this.sourceRoot(path.join(__dirname, './templates'));
 
   try {
-    this.appname = require(path.join(process.cwd(), 'bower.json')).name;
+    this.appname = require(path.join(process.cwd(), 'package.json')).name;
   } catch (e) {
     this.appname = path.basename(process.cwd());
   }

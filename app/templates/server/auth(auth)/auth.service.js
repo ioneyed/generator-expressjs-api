@@ -30,7 +30,7 @@ function isAuthenticated() {
       <% if (filters.mongooseModels) { %>User.findByIdAsync(req.user._id)<% }
          if (filters.sequelizeModels) { %>User.find({
         where: {
-          _id: req.user._id
+          id: req.user.id
         }
       })<% } %>
         .then(function(user) {
@@ -71,9 +71,14 @@ function hasRole(roleRequired) {
  * Returns a jwt token signed by the app secret
  */
 function signToken(id, role) {
-  return jwt.sign({ _id: id, role: role }, config.secrets.session, {
-    expiresInMinutes: 60 * 5
+  <% if(filters.mongooseModels) { %>
+    return jwt.sign({ _id: id, role: role }, config.secrets.session, {
+    expiresIn: 60 * 60 * 5
   });
+  <% } if (filters.sequelizeModels) { %>
+  return jwt.sign({ id: id, role: role }, config.secrets.session, {
+    expiresIn: 60 * 60 * 5
+  }); <% }%>
 }
 
 /**
@@ -83,7 +88,8 @@ function setTokenCookie(req, res) {
   if (!req.user) {
     return res.status(404).send('Something went wrong, please try again.');
   }
-  var token = signToken(req.user._id, req.user.role);
+  <% if (filters.mongooseModels) { %>var token = signToken(req.user._id, req.user.role); <% } %>
+  <% if (filters.sequelizeModels) { %>var token = signToken(req.user.id, req.user.role); <% } %>
   res.cookie('token', token);
   res.redirect('/');
 }

@@ -55,7 +55,7 @@ describe('User API:', function() {
         .expect(200)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
-          <%= expect() %>res.body._id.toString()<%= to() %>.equal(user._id.toString());
+          <%= expect() %> <% if (filters.mongooseModels) { %>res.body._id.toString() <% } if (filters.sequelizeModels) { %> res.body.id.toString() <% } %> <%= to() %>.equal(<% if(filters.mongooseModels) { %> user._id.toString() <% } if (filters.sequelizeModels) { %> user.id.toString() <% } %>);
           done();
         });
     });
